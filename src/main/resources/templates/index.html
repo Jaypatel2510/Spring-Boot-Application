@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Schedule</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="../static/js/script.js" th:src="@{/js/script.js}"></script>
+<style>
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 p-5 bg-red h-md-100">
+				<h2>Capstone Projects</h2>
+				<div class="row" th:each="c : ${capstoneList}">
+					<div class="col-sm-10">
+						<a href="#" th:onclick="'getCapstone('+ ${c.id} + ')'"
+							th:text="${c.name}">Name</a>
+						<div th:id="'capstone' + ${c.id}"></div>
+					</div>
+					<div class="col-sm-2 ">
+							 <a th:href="@{/voteUp/} + ${c.id}">Vote Up</a>
+							 <a th:href="@{/voteDown/} + ${c.id}">Vote Down</a>
+							 <a th:href="@{/deleteCapstone/} + ${c.id}">Delete</a><br><hr>
+					</div>
+					<br>
+				</div>
+				<br>
+				<hr>
+				<div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+					<form method="post" action="#" th:action="@{/insertCapstone}"
+						th:object="${capstone}">
+						<h2>Add Capstone Project</h2>
+						<div class="form-group">
+							<label for="name">Name:</label> <input class="form-control"
+								type="text" name="name" th:field="*{name}" placeholder="Name" />
+						</div>
+						<div class="form-group">
+							<label for="description">Description:</label>
+							<textarea class="form-control" name="description" rows="5" cols="200"
+								th:field="*{description}" placeholder="Description"></textarea>
+						</div>
+						
+						<div class="form-group">
+							<label for="author">Author:</label> <input class="form-control"
+								type="text" name="author" th:field="*{author}" placeholder="Author" />
+						</div>
+						
+						<button class="btn btn-dark col-sm-offset-2 col-sm-8"
+							type="submit" value="Add Capstone">Add Capstone</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
